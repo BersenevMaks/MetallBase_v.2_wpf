@@ -1,0 +1,425 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BFFBCF52-4AB2-4BB2-8AA5-2748F157F38D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>MetallBase2</RootNamespace>
+    <AssemblyName>MetallBase2</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ico_metall.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommonServiceLocator, Version=2.0.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.2.0.4\lib\net45\CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.7.2.0.1367\lib\net45\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1367\lib\net45\Prism.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.7.2.0.1367\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Classes\OrganizationsViewModel.cs" />
+    <Compile Include="Classes\RedactorMarksViewModel.cs" />
+    <Compile Include="RedactorMarks.xaml.cs">
+      <DependentUpon>RedactorMarks.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModels\AddOrganizationVM.cs" />
+    <Compile Include="ViewModels\ColledMemberAttribute.cs" />
+    <Compile Include="WAddOrganization.xaml.cs">
+      <DependentUpon>WAddOrganization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WInfoOrganization.xaml.cs">
+      <DependentUpon>WInfoOrganization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WOrganizations.xaml.cs">
+      <DependentUpon>WOrganizations.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WSettings.xaml.cs">
+      <DependentUpon>WSettings.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ClassesParsers\Chel\Class_AlfaMetallExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_AlmasExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_AmetExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_AtlanticExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_BingWord.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_ChelyabinskProfit_Excel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_DakorExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_EgidaPromExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_EnergoAlyansExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_InkomMetallExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_InplanoExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_KontinentChel_Excel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_Kuznetsov.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_MaksMet_Word.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_MaxMet2Word.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_MaxMetWord.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_MetalBrendUralExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_MetallGrad_Excel_Word.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_MetallInvestExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_MetallSnabUral_Excel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_MetallTorgExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_Metallurg220719_Excel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_perv_nerj_kom_Excel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_ProfMet - Копировать.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_ProfMet — копия.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_ProfMet_140819_Excel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_ProfMet_250118_Excel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_PromMetMSK_Excel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_RegionMetPromExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_RosPromCentrExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_RostehcomExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_SpecStal_MExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_SpecTrubaExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_SPK080719.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_StalcomExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_StalMashUralExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_StalnoyProfil_Excel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_StalTranzit_Zlat_Excel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_TD_MetizExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_TehnoMetExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_TehnoMetWord.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_TeploobmenTrubExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_TrubaMetWord.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_Truba_Na_Sklade_Excel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_UralCherMet190819.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_UralskayaMetallobazaExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_UralTeploEnergoServiceExcel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_UralTeploEnergoServiceWord.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_ZolotoyVek240719_Excel.cs" />
+    <Compile Include="ClassesParsers\Chel\Class_ZolotoyVekExcel.cs" />
+    <Compile Include="ClassesParsers\Ekb\ClassAtomRos.cs" />
+    <Compile Include="ClassesParsers\Ekb\ClassA_Group_Trub.cs" />
+    <Compile Include="ClassesParsers\Ekb\ClassA_Group_TrubProf.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_Atom_Prom_Kompleks_Excel.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_A_Grup_120719_Excel.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_cxml_UTK_Stal_EKB_Excel.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_Garus.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_GrandUniversal.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_inkomMetal.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_KSM.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_MedGora.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_MetallBasa3_EKB_Excel.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_MetallPromSnab.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_Metchiv.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_Prommetal.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_RosTehKom_160819_Excel.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_SibMetal.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_Skat.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_SnabMetalServis.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_SpecMetKomplekt.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_SpecMetKomplektExcel.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_StalMarket.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_StroiTehCentr.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_StroiTehnolog.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_TelExcel.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_UMPC.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_UPTK.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_UralCentrStal.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_UralCherMet.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_UralCherMet190819_Excel.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_UralCherMetExcel.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_UralMetStroi.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_UralPromMetal.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_UralPromMetal_120719_Excel.cs" />
+    <Compile Include="ClassesParsers\Ekb\Class_UTK_Stal_EKB_Excel.cs" />
+    <Compile Include="Classes\CManager.cs" />
+    <Compile Include="Classes\CProdDetails.cs" />
+    <Compile Include="Classes\CProdItem.cs" />
+    <Compile Include="Classes\CProductTreeView.cs" />
+    <Compile Include="Classes\CProductTypeTreeView.cs" />
+    <Compile Include="Forms\AddMarkName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddMarkName.designer.cs">
+      <DependentUpon>AddMarkName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddNameProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddNameProduct.designer.cs">
+      <DependentUpon>AddNameProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Form_PDF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportMetalBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ImportMetalBaseForm.designer.cs">
+      <DependentUpon>ImportMetalBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Managers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Managers.designer.cs">
+      <DependentUpon>Managers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ManualNameProdRedactor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ManualNameProdRedactor.designer.cs">
+      <DependentUpon>ManualNameProdRedactor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NerjMarkForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NerjMarkForm.designer.cs">
+      <DependentUpon>NerjMarkForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Organizations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Organizations.designer.cs">
+      <DependentUpon>Organizations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RenameProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RenameProductForm.designer.cs">
+      <DependentUpon>RenameProductForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\settingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\settingForm.designer.cs">
+      <DependentUpon>settingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Sklad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Sklad.designer.cs">
+      <DependentUpon>Sklad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HelpClasses\Class_DTM.cs" />
+    <Compile Include="HelpClasses\Class_RowToDtTable.cs" />
+    <Compile Include="HelpClasses\C_InfoTable.cs" />
+    <Compile Include="HelpClasses\C_Lists.cs" />
+    <Compile Include="HelpClasses\C_RegexParamProduct.cs" />
+    <Compile Include="HelpClasses\FillDataGridView.cs" />
+    <Compile Include="HelpClasses\InfoOrganization.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="RedactorMarks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WAddOrganization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WInfoOrganization.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WOrganizations.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Forms\AddMarkName.resx">
+      <DependentUpon>AddMarkName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddNameProduct.resx">
+      <DependentUpon>AddNameProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ImportMetalBaseForm.resx">
+      <DependentUpon>ImportMetalBaseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Managers.resx">
+      <DependentUpon>Managers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ManualNameProdRedactor.resx">
+      <DependentUpon>ManualNameProdRedactor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NerjMarkForm.resx">
+      <DependentUpon>NerjMarkForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Organizations.resx">
+      <DependentUpon>Organizations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RenameProductForm.resx">
+      <DependentUpon>RenameProductForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\settingForm.resx">
+      <DependentUpon>settingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Sklad.resx">
+      <DependentUpon>Sklad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Import_excel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AddPage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\closeBtn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\closeBtn1.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ClosePage.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\connect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\w256h2561346685464Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ico_metall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Word">
+      <Guid>{00020905-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>8</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico_metall.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

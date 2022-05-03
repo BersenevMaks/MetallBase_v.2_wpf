@@ -1,0 +1,149 @@
+﻿<Window x:Class="MetallBase2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MetallBase2"
+        mc:Ignorable="d"
+        Title="База Металла" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="Window_Loaded"
+        Icon="pack://application:,,,/Resources/ico_metall.png"
+        >
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="307*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="170"/>
+            <ColumnDefinition Width="637*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="GridTreeView" Grid.Row="1" Grid.Column="0" Height="auto" Width="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="325*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <RadioButton x:Name="rbProd" GroupName="ViewSort" Content="По продукции" IsChecked="False" Checked="RadioButton_Checked"/>
+                <RadioButton x:Name="rbType" GroupName="ViewSort" Content="По типам" IsChecked="False" Checked="RadioButton_Checked" />
+            </StackPanel>
+            <TreeView x:Name="TreeViewMain" MouseDoubleClick="TreeViewMain_MouseDoubleClick" PreviewMouseDoubleClick="TreeViewMain_PreviewMouseDoubleClick" Grid.Row="1"
+                      TreeViewItem.Selected="TreeViewItemSelected">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Path=Types}">
+                        <TextBlock Text="{Binding Name}"/>
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding TypeName}"/>
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </Grid>
+
+        <TabControl x:Name="MainTabControl" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding}" SelectionChanged="TabDynamic_SelectionChanged">
+            <TabControl.Resources>
+                <DataTemplate x:Key="TabHeader" DataType="TabItem">
+                    <DockPanel>
+                        <Button Name="btnDelete" DockPanel.Dock="Right" Margin="5,0,0,0" Padding="0" Click="BtnDelete_Click" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Name}">
+                            <Image Source="pack://application:,,,/Resources/ClosePage.png" Height="11" Width="11"></Image>
+                        </Button>
+                        <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=Header}" />
+                    </DockPanel>
+                </DataTemplate>
+            </TabControl.Resources>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <Grid x:Name="GridInTabs" HorizontalAlignment="Stretch" Width="auto">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="100*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="45*"/>
+                        </Grid.ColumnDefinitions>
+                        <Expander Header="Фильтр" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Width="auto" 
+                                  IsExpanded="{Binding ExpanderState}">
+                            <Grid HorizontalAlignment="Left" Width="auto">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="27"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Диаметр/Толщина" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                                <TextBox Text="{Binding TxtDiamFilter}" TextChanged="TextBox_TextChanged" Grid.Row="0" Grid.Column="1" Height="25" VerticalAlignment="Center"/>
+                                <Label Content="Толщина/Ширина" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                                <TextBox Text="{Binding txtTolshFilter}" Grid.Row="1" Grid.Column="1" Height="25" VerticalAlignment="Center"/>
+                                <Label Content="Марка" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" />
+                                <ComboBox Text="{Binding combMarkFilter}" ItemsSource="{Binding ComboBoxMarks}" IsEditable="True" Grid.Row="2" Grid.Column="1" Height="25" VerticalAlignment="Center"/>
+                                <Label Content="Организация" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center"/>
+                                <ComboBox Text="{Binding combOrganizarionFilter}" ItemsSource="{Binding ComboBoxOrgs}" IsEditable="True" Grid.Row="0" Grid.Column="3" Height="25" VerticalAlignment="Center"/>
+                                <Label Content="ГОСТ, ТУ" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center"/>
+                                <ComboBox Text="{Binding combGosts}" ItemsSource="{Binding ComboBoxGosts}" IsEditable="True" Grid.Row="1" Grid.Column="3" Height="25" VerticalAlignment="Center"/>
+                                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="4" Margin="5,0">
+                                    <Button x:Name="btnApplayFilter" Content="Применить"  Margin="5,0" Width="70"
+                                        VerticalAlignment="Center" Click="BtnApplayFilter_Click"/>
+                                    <Button x:Name="btnClearFilter" Content="Сброс"  Margin="5,0" Width="70"
+                                        VerticalAlignment="Center" Click="BtnClearFilter_Click"/>
+                                </StackPanel>
+                            </Grid>
+                        </Expander>
+                        <DataGrid x:Name="dataGrid" ItemsSource="{Binding Prods}" IsReadOnly="True" RowHeight="20" 
+                                  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"
+                                  Width="auto" MinColumnWidth="80" ColumnWidth="auto" HorizontalContentAlignment="Stretch" CanUserAddRows="False" CanUserDeleteRows="False">
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                                </Style>
+                            </DataGrid.Resources>
+                            <DataGrid.Style>
+                                <Style TargetType="DataGrid">
+                                    <Setter Property="AlternatingRowBackground" Value="WhiteSmoke"/>
+                                    <Setter Property="AlternationCount" Value="2"/>
+                                </Style>
+                            </DataGrid.Style>
+                        </DataGrid>
+                    </Grid>
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+        <StatusBar Height="40" Grid.Row="3" Grid.ColumnSpan="2" Margin="0" VerticalAlignment="Top" Width="auto" HorizontalAlignment="Stretch">
+            <Label x:Name="MainLabel" Margin="0" Content="1234567890" Height="auto" VerticalAlignment="Stretch" />
+        </StatusBar>
+        <Menu HorizontalAlignment="Stretch" Height="25" Margin="0,0,0,0" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Top" Width="auto">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Выход" Click="WindowCloseButton"/>
+                <Separator/>
+            </MenuItem>
+            <MenuItem Header="Правка">
+                <MenuItem x:Name="MIOrganizations" Header="Организации..." Click="MIOrganizations_Click"/>
+                <MenuItem Header="Редактор марок ->">
+                    <MenuItem x:Name="MINerg" Header="Нержавейка" Click="MINerg_Click"/>
+                    <MenuItem x:Name="MIAlumin" Header="Алюминий" Click="MIAlumin_Click"/>
+                    <MenuItem x:Name="MIMed" Header="Медь" Click="MIMed_Click"/>
+                    <MenuItem x:Name="MILatun" Header="Латунь" Click="MILatun_Click"/>
+                </MenuItem>
+                <MenuItem x:Name="MIListErrors" Header="Исправить несоответствия в листах..." Click="MIListErrors_Click"/>
+            </MenuItem>
+            <MenuItem Header="Настройки">
+                <MenuItem Header="Подключение к базе данных..." Click="MISettingsClick"/>
+            </MenuItem>
+            <MenuItem Width="25" Height="25" Click="MenuItem_Click">
+                <MenuItem.Icon>
+                    <Image Source="/Resources/Import_excel.png" Stretch="Fill"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </Menu>
+
+    </Grid>
+</Window>
